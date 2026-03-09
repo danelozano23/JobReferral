@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Opportunity – FB Post</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* 1:1 square — Facebook recommended 1080×1080 */
+  .canvas {
+    width: 540px;
+    height: 540px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+
+  /* ── Background geometry ── */
+  .bg-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, #ff5a1f 0%, #ff8c42 60%, #ffc14a 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+    z-index: 0;
+  }
+
+  .bg-circle1 {
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    z-index: 1;
+  }
+
+  .bg-circle2 {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    z-index: 1;
+  }
+
+  /* ── Content layout ── */
+  .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 32px 22px;
+  }
+
+  /* Top section */
+  .top {
+    flex: 0 0 auto;
+  }
+
+  .now-hiring {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .dot-live {
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .role-pill {
+    display: inline-block;
+    background: white;
+    color: #ff5a1f;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* Middle section */
+  .middle {
+    flex: 1;
+    display: flex;
+    gap: 14px;
+    margin-top: 22px;
+    align-items: flex-start;
+  }
+
+  /* Sites column */
+  .col-sites {
+    flex: 1;
+  }
+
+  .col-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 8px;
+  }
+
+  .sites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .site-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-left: 3px solid #ff5a1f;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  /* Benefits column */
+  .col-benefits {
+    flex: 1;
+  }
+
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ben-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: #444;
+    line-height: 1.3;
+  }
+
+  .ben-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ff5a1f;
+    flex-shrink: 0;
+  }
+
+  /* Bottom CTA */
+  .cta-bar {
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, #ff5a1f, #ff8c42);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+
+  .cta-left { color: white; }
+  .cta-main {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .cta-sub {
+    font-size: 10.5px;
+    opacity: 0.88;
+    margin-top: 2px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: white;
+    color: #ff5a1f;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 9px 18px;
+    border-radius: 24px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    cursor: pointer;
+  }
+
+  /* Hiring hours strip */
+  .hours-strip {
+    text-align: center;
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="bg-top"></div>
+  <div class="bg-circle1"></div>
+  <div class="bg-circle2"></div>
+
+  <div class="content">
+    <!-- TOP -->
+    <div class="top">
+      <div class="now-hiring"><div class="dot-live"></div> Now Hiring</div>
+      <h1>We're Looking for<br>Customer Support Rockstars!</h1>
+      <div class="role-pill">Customer Support Representative</div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+
+      <div class="col-sites">
+        <div class="col-label">📍 Available Sites</div>
+        <div class="sites-list">
+          <div class="site-item">Quezon City</div>
+          <div class="site-item">Pasay (MOA)</div>
+          <div class="site-item">Alabang</div>
+          <div class="site-item">Cebu</div>
+          <div class="site-item">Iloilo</div>
+        </div>
+      </div>
+
+      <div class="col-benefits">
+        <div class="col-label">🎁 Benefits</div>
+        <div class="benefits-list">
+          <div class="ben-item"><div class="ben-dot"></div>Day 1 HMO + dependents</div>
+          <div class="ben-item"><div class="ben-dot"></div>Above-market bonuses</div>
+          <div class="ben-item"><div class="ben-dot"></div>Retirement plan</div>
+          <div class="ben-item"><div class="ben-dot"></div>Performance incentives</div>
+          <div class="ben-item"><div class="ben-dot"></div>Paid time off</div>
+          <div class="ben-item"><div class="ben-dot"></div>Career advancement</div>
+          <div class="ben-item"><div class="ben-dot"></div>Work-life balance</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar">
+      <div class="cta-left">
+        <div class="cta-main">Interested?</div>
+        <div class="cta-sub">Take the first step — apply now!</div>
+      </div>
+      <a href="https://forms.cloud.microsoft/r/GsAGwpJUpm" target="_blank" class="cta-btn">Apply Now →</a>
+    </div>
+
+    <div class="hours-strip">Virtual hiring available Mon–Fri &nbsp;|&nbsp; 10:00 AM – 9:00 PM</div>
+  </div>
+</div>
+</body>
+</html>
